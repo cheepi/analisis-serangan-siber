@@ -120,11 +120,12 @@ plt.figure(figsize=(12, 6))
 prediksi_masa_depan = np.polyval(best_koefisien, hari_masa_depan)
 plt.plot(hari_masa_depan, prediksi_masa_depan, label=f'Prediksi Derajat {best_degree} (Korelasi Terbaik)')
 
-print(f"Prediksi Derajat {best_degree} 30 Hari Ke Depan: ")
+print(f"Prediksi Terbaik 30 Hari Ke Depan (Polinomial derajat {best_degree}): ")
 print(prediksi_masa_depan)
 
 plt.title("Prediksi 30 Hari Serangan Siber (Trendline dengan Korelasi Terbaik)")
 plt.xlabel("Hari Sejak Awal Pengamatan (Mulai dari Hari ke-1381 hingga Hari ke-1410)")
 plt.ylabel("Jumlah Serangan yang Diprediksi")
 plt.legend()
+plt.savefig("C:/Users/syifa/Downloads/Prediksi 30 Hari Berdasarkan Regresi Terbaik.png", dpi=250, bbox_inches="tight")
 plt.show()

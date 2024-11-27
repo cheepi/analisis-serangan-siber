@@ -70,62 +70,57 @@ plt.ylabel("Jumlah Serangan")
 plt.legend()
 plt.show()
 
-# Menghitung Hari Numerik
+# menghitung hari numerik
 df_attacks_per_day_cleaned['HariNumerik'] = (df_attacks_per_day_cleaned['Tanggal'] - 
                                              df_attacks_per_day_cleaned['Tanggal'].min()).dt.days
 x = df_attacks_per_day_cleaned['HariNumerik']
 y = df_attacks_per_day_cleaned['jumlah']
 
-# Regresi Linear dan Polinomial (Derajat 1 sampai 5)
 plt.figure(figsize=(12, 6))
 plt.plot(df_attacks_per_day_cleaned['Tanggal'], df_attacks_per_day_cleaned['jumlah'], label='Observasi', color='black')
 
-best_correlation = -1  # Untuk menyimpan korelasi tertinggi
-best_degree = 1        # Untuk menyimpan derajat terbaik
-best_koefisien = None  # Untuk menyimpan koefisien dari derajat terbaik
+# menyimpan nilai sementara untuk regresi terbaik (nilai r, derajatnya, dan koefisien dari derajat tersebut)
+best_correlation = -1  
+best_degree = 1        
+best_koefisien = None  
 
-# Loop untuk menghitung regresi polinomial dan korelasi Pearson
+# loop perhitungan regresi polinomial dan penentuan regresi terbaik berdasarkan nilai r
 for derajat in range(1, 6):
-    # Regresi Polinomial
     koefisien = np.polyfit(x, y, derajat)
     y_pred = np.polyval(koefisien, x)
     
-    # Menghitung Korelasi Pearson
     korelasi, p_value_korelasi = pearsonr(y, y_pred)
     
     print(f"Koefisien untuk Derajat {derajat}: {koefisien}")
-    print(f"Korelasi Pearson untuk Derajat {derajat}: {korelasi}, P-value: {p_value_korelasi}\n")
+    print(f"Korelasi untuk Derajat {derajat}: {korelasi}, P-value: {p_value_korelasi}\n")
     
-    # Menyimpan korelasi tertinggi
+    # menentukan r tertinggi
     if korelasi > best_correlation:
         best_correlation = korelasi
         best_degree = derajat
         best_koefisien = koefisien
 
-    # Menambahkan plot untuk semua derajat
+    # plot untuk semua derajat
     plt.plot(df_attacks_per_day_cleaned['Tanggal'], y_pred, label=f'Garis Tren Derajat {derajat}')
 
-# Menampilkan plot untuk semua derajat
 plt.title("Regresi Linear dan Polinomial untuk Serangan Siber Harian Seiring Waktu")
 plt.xlabel("Tanggal")
 plt.ylabel("Jumlah Serangan")
 plt.legend()
 plt.show()
 
-# Prediksi 30 Hari Ke Depan dengan Derajat Terbaik
+# prediksi 30 hari ke depan dengan regresi terbaik
 hari_masa_depan = np.arange(x.max() + 1, x.max() + 31)
 plt.figure(figsize=(12, 6))
 
-# Prediksi untuk derajat dengan korelasi terbaik
 prediksi_masa_depan = np.polyval(best_koefisien, hari_masa_depan)
 plt.plot(hari_masa_depan, prediksi_masa_depan, label=f'Prediksi Derajat {best_degree} (Korelasi Terbaik)')
 
 print(f"Prediksi Terbaik 30 Hari Ke Depan (Polinomial derajat {best_degree}): ")
 print(prediksi_masa_depan)
 
-plt.title("Prediksi 30 Hari Serangan Siber (Trendline dengan Korelasi Terbaik)")
+plt.title("Prediksi 30 Hari Serangan Siber Berdasarkan Regresi Terbaik")
 plt.xlabel("Hari Sejak Awal Pengamatan (Mulai dari Hari ke-1381 hingga Hari ke-1410)")
-plt.ylabel("Jumlah Serangan yang Diprediksi")
+plt.ylabel("Jumlah Serangan")
 plt.legend()
-plt.savefig("C:/Users/syifa/Downloads/Prediksi 30 Hari Berdasarkan Regresi Terbaik.png", dpi=250, bbox_inches="tight")
 plt.show()

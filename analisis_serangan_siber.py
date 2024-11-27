@@ -94,7 +94,6 @@ for derajat in range(1, 6):
     print(f"Koefisien untuk Derajat {derajat}: {koefisien}")
     print(f"Korelasi untuk Derajat {derajat}: {korelasi}, P-value: {p_value_korelasi}\n")
     
-    # menentukan r tertinggi
     if korelasi > best_correlation:
         best_correlation = korelasi
         best_degree = derajat

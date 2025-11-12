@@ -1,6 +1,6 @@
 # Analisis Serangan Siber Harian
 
-ini disusun untuk memenuhi tugas mata kuliah Statistika (TKU212111). Analisis ini bertujuan untuk memahami pola dan tren serangan siber yang terjadi setiap hari, serta memprediksi potensi peningkatan aktivitas serangan di masa mendatang.
+Analisis ini disusun untuk memenuhi tugas mata kuliah Statistika (TKU212111). Tujuannya adalah memahami pola dan tren serangan siber yang terjadi setiap hari, serta memprediksi potensi peningkatan aktivitas serangan di masa mendatang.
 
 ## Deskripsi Data
 
@@ -22,12 +22,30 @@ Data yang digunakan diambil dari [Kaggle: Cyber Security Attacks](https://www.ka
 4. **Regresi**: Menggunakan regresi linear dan polinomial untuk memodelkan dan memprediksi tren jumlah serangan siber di masa depan.
 5. **Visualisasi**: Menampilkan grafik untuk melihat tren data dan prediksi masa depan.
 
+## Cara Menjalankan
+1. Unduh file `analisis_serangan_siber.ipynb` dari repositori ini.
+2. Jalankan file menggunakan Google Colab atau Jupyter Notebook.
+3. Pastikan pustaka berikut tersedia di dalam notebook:
+    ```bash
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.stats import ttest_ind, f_oneway, pearsonr
+    ```
+5. Jalankan setiap sel dari atas ke bawah untuk melihat hasil analisis dan grafik.
+
 ## Modul yang Digunakan
 
 - `pandas`: Untuk manipulasi data dan pengolahan dataset.
 - `numpy`: Untuk operasi matematika dan perhitungan statistik.
 - `matplotlib`: Untuk visualisasi grafik dan tren.
 - `scipy`: Untuk uji hipotesis dan ANOVA.
+
+## Hasil Utama
+
+- Ditemukan adanya variasi jumlah serangan antarhari.
+- Uji-T menunjukkan apakah terdapat perbedaan signifikan antara hari kerja dan akhir pekan.
+- Model regresi menunjukkan tren peningkatan atau penurunan aktivitas serangan siber.
 
 ## Sumber Data
 
